@@ -89,7 +89,7 @@
 <body>
 
     <div class="top-board">
-        <div class="digit" style="grid-row: 1; grid-column: 1;">05:00</div>
+        <div class="digit" id="timer_digits" style="grid-row: 1; grid-column: 1;">05:00</div>
         <div class="time-buttons" style="grid-row: 1; grid-column: 2;">
             <button class="time-btn" onclick="startTimer()">Start</button>
             <button class="time-btn" onclick="stopTimer()">Stop</button>
@@ -175,4 +175,11 @@
                 document.getElementById('score1').textContent = score1;
             } else if (player === 2) {
                 score2 += delta;
-                document.getElementById('score2').textContent
+                document.getElementById('score2').textContent = score2;
+            }
+        }
+    </script>
+
+</body>
+
+</html>
