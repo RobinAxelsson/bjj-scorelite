@@ -130,7 +130,7 @@
 
         <button class="panel-btn" style="grid-row: 4; grid-column: 1;" onclick="savePoints(null, 0,0,0)"></button>
         <button class="panel-btn" style="grid-row: 4; grid-column: 2;" onclick="savePoints(null, 0,0,0)"></button>
-        <button class="panel-btn" style="grid-row: 4; grid-column: 3;">Cp</button>
+        <button class="panel-btn" style="grid-row: 4; grid-column: 3;" onclick="copyMatchScore()">Cp</button>
         <button class="panel-btn" style="grid-row: 4; grid-column: 4;">...</button>
     </div>
 
@@ -223,6 +223,14 @@
                 document.getElementById('adv2').textContent = adv2;
                 document.getElementById('pen2').textContent = pen2;
             }
+        }
+
+        function copyMatchScore() {
+            let player1 = document.getElementById('player-1').innerText;
+            let player2 = document.getElementById('player-2').innerText;
+            let matchSummary = `${player1} ${score1} A${adv1} P${pen1}\n${player2} ${score2} A${adv2} P${pen2}`;
+
+            navigator.clipboard.writeText(matchSummary);
         }
     </script>
 
