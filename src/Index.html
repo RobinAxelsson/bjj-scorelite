@@ -32,16 +32,16 @@
             height: 80vh;
         }
 
-        .player {
+        .player-btn {
             display: flex;
             column-span: 2;
             flex-direction: column;
-            /* align-items: center; */
+            align-items: center;
             justify-content: center;
             overflow: hidden;
         }
 
-        .left-digits {
+        .digit {
             font-size: 9vw;
             grid-column: 1;
             display: flex;
@@ -49,52 +49,89 @@
             align-items: center;
         }
 
-        .delimiter{
-            height: 1px;
+        .button-panel {
+            display: grid;
+            grid-template-columns: repeat(4, auto);
+            grid-template-rows: repeat(4, auto);
+            grid-row: 1;
+            grid-column: 1 / span 2;
             width: 100vw;
-            border: 1px;
-            border-style: solid;
-            border-color: black;
         }
 
+        .panel-btn {
+            height: 11vh;
+        }
+
+        .time-buttons {
+            display: inline-flex;
+            width: 100%;
+            height: 8vh;
+            justify-content: space-between;
+        }
+
+        .time-btn {
+            width: 100%;
+        }
+
+        .top-board {
+            width: 100vw;
+            display: grid;
+        }
+
+        .player-section {
+            display: grid;
+            grid-template-columns: repeat(2, auto);
+            grid-template-rows: repeat(2, auto);
+        }
     </style>
 </head>
 
 <body>
 
-    <div class="scoreboard">
-        <div class="left-digits" id="timer_digits" style="grid-row: 1;">05:00</div>
-        <button style="grid-row: 1; grid-column: 2;" onclick="startTimer()">Start</button>
-        <button style="grid-row: 1; grid-column: 3;" onclick="stopTimer()">Stop</button>
-        <button style="grid-row: 1; grid-column: 4;" onclick="resetTimer()">Reset</button>
+    <div class="top-board">
+        <div class="digit" style="grid-row: 1; grid-column: 1;">05:00</div>
+        <div class="time-buttons" style="grid-row: 1; grid-column: 2;">
+            <button class="time-btn" onclick="startTimer()">Start</button>
+            <button class="time-btn" onclick="stopTimer()">Stop</button>
+            <button class="time-btn" onclick="resetTimer()">Reset</button>
+        </div>
+        <div class="score-digits" style="grid-row: 2; grid-column: 1;">
+            <div class="digit" id="player1_score">0</div>
+            <div class="digit" style="color: green" id="player1_advantage">0</div>
+            <div class="digit" style="color: red" id="player1_penelty">0</div>
+        </div>
 
-        <div style="grid-row: 2; grid-column:1 / span3"></div>
+        <div class="score-digits" style="grid-row: 3; grid-column: 1;">
+            <div class="digit" id="player2_score">0</div>
+            <div class="digit" style="color: green" id="player2_advantage">0</div>
+            <div class="digit" style="color: red" id="player1_penelty">0</div>
+        </div>
 
-        <div class="left-digits" id="score1" style="grid-row: 2 / span 1;">0</div>
-        <div class="left-digits" id="advantage1" style="grid-row: 3 / span 1;">0</div>
-        <button class="player" id="player-1" style="grid-row: 2 / span 2; grid-column:2 / span 3;">Jasmine Valfridsson</button>
-        
-        <div class="delimiter" style="grid-row: 4; grid-column:1 / span3"></div>
-
-        <div class="left-digits" id="score2" style="grid-row: 4 / span 1;">0</div>
-        <div class="left-digits" id="advantage1" style="grid-row:5  / span 1;">0</div>
-        <button class="player" id="player-2" style="grid-row: 4 / span 2; grid-column:2 / span 3;">Shan Salih Axelsson</b>
-        
-        <button style="grid-row: 6; grid-column: 1;" onclick="startTimer()">+1</button>
-        <button style="grid-row: 6; grid-column: 2;" onclick="startTimer()">+2</button>
-        <button style="grid-row: 6; grid-column: 3;" onclick="stopTimer()">-1</button>
-        <button style="grid-row: 6; grid-column: 4;" onclick="resetTimer()">-2</button>
-
-        <button style="grid-row: 7; grid-column: 1;" onclick="startTimer()">+3</button>
-        <button style="grid-row: 7; grid-column: 2;" onclick="startTimer()">+4</button>
-        <button style="grid-row: 7; grid-column: 3;" onclick="stopTimer()">-3</button>
-        <button style="grid-row: 7; grid-column: 4;" onclick="resetTimer()">-4</button>
-
-        <button style="grid-row: 8; grid-column: 1;" onclick="startTimer()">Copy</button>
-        <button style="grid-row: 8; grid-column: 2;" onclick="startTimer()">+A</button>
-        <button style="grid-row: 8; grid-column: 3;" onclick="stopTimer()">-A</button>
-        <button style="grid-row: 8; grid-column: 4;" onclick="resetTimer()">Edit</button>
+        <button class="player-btn" id="player-1" style="grid-row: 2; grid-column:2;">Jasmine Valfridsson</button>
+        <button class="player-btn" id="player-2" style="grid-row: 3; grid-column:2;">Shan Salih Axelsson</b>
     </div>
+    <div class="button-panel">
+        <button class="panel-btn" style="grid-row: 1; grid-column: 1;" onclick="startTimer()">+1</button>
+        <button class="panel-btn" style="grid-row: 1; grid-column: 2;" onclick="startTimer()">+2</button>
+        <button class="panel-btn" style="grid-row: 1; grid-column: 3;" onclick="stopTimer()">-1</button>
+        <button class="panel-btn" style="grid-row: 1; grid-column: 4;" onclick="resetTimer()">-2</button>
+
+        <button class="panel-btn" style="grid-row: 2; grid-column: 1;" onclick="startTimer()">+3</button>
+        <button class="panel-btn" style="grid-row: 2; grid-column: 2;" onclick="startTimer()">+4</button>
+        <button class="panel-btn" style="grid-row: 2; grid-column: 3;" onclick="stopTimer()">-3</button>
+        <button class="panel-btn" style="grid-row: 2; grid-column: 4;" onclick="resetTimer()">-4</button>
+ 
+        <button class="panel-btn" style="grid-row: 3; grid-column: 1;" onclick="startTimer()">+A</button>
+        <button class="panel-btn" style="grid-row: 3; grid-column: 2;" onclick="startTimer()">+P</button>
+        <button class="panel-btn" style="grid-row: 3; grid-column: 3;" onclick="stopTimer()">-A</button>
+        <button class="panel-btn" style="grid-row: 3; grid-column: 4;" onclick="resetTimer()">-P</button>
+
+        <button class="panel-btn" style="grid-row: 4; grid-column: 1;" onclick="startTimer()"></button>
+        <button class="panel-btn" style="grid-row: 4; grid-column: 2;" onclick="startTimer()"></button>
+        <button class="panel-btn" style="grid-row: 4; grid-column: 3;" onclick="stopTimer()">C</button>
+        <button class="panel-btn" style="grid-row: 4; grid-column: 4;" onclick="resetTimer()">...</button>
+    </div>
+
 
     <script>
         let timer = 300;
