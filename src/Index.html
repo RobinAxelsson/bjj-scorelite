@@ -111,7 +111,7 @@
         <div class="time-buttons" style="grid-row: 1; grid-column: 2;">
             <button class="time-btn" onclick="startTimer()">Start</button>
             <button class="time-btn" onclick="stopTimer()">Stop</button>
-            <button class="time-btn" onclick="resetTimer()">Reset</button>
+            <button class="time-btn" onclick="resetMatch()">Reset</button>
         </div>
         <div class="score-digits" style="grid-row: 2; grid-column: 1;">
             <div class="digit" id="score1">0</div>
@@ -183,6 +183,11 @@
 
         let intervalId = null;
 
+        function resetMatch(){
+            resetTimer();
+            resetPoints();
+        }
+
         function startTimer() {
             if (intervalId === null) {
                 intervalId = setInterval(function () {
@@ -227,6 +232,24 @@
 
             if (button != null)
                 button.style.backgroundColor = 'yellow';
+        }
+
+        function resetPoints() {
+            score1 = 0;
+            adv1 = 0;
+            pen1 = 0;
+            sub1 = false;
+            score2 = 0;
+            adv2 = 0;
+            pen2 = 0;
+            sub2 = false;
+
+            document.getElementById('score1').textContent = score1;
+            document.getElementById('adv1').textContent = adv1;
+            document.getElementById('pen1').textContent = pen1;
+            document.getElementById('score2').textContent = score2;
+            document.getElementById('adv2').textContent = adv2;
+            document.getElementById('pen2').textContent = pen2;
         }
 
         function setPoints(fighter) {
