@@ -111,25 +111,25 @@
         <button class="player-btn" id="player-2" style="grid-row: 3; grid-column:2;" onclick="setPoints(2)">Shan Salih Axelsson</b>
     </div>
     <div class="button-panel">
-        <button class="panel-btn" style="grid-row: 1; grid-column: 1;" onclick="savePoints(1,0,0)">+1</button>
-        <button class="panel-btn" style="grid-row: 1; grid-column: 2;" onclick="savePoints(2,0,0)">+2</button>
-        <button class="panel-btn" style="grid-row: 1; grid-column: 3;" onclick="savePoints(-1,0,0)">-1</button>
-        <button class="panel-btn" style="grid-row: 1; grid-column: 4;" onclick="savePoints(-2,0,0)">-2</button>
+        <button class="panel-btn" style="grid-row: 1; grid-column: 1;" onclick="savePoints(this, 1,0,0)">+1</button>
+        <button class="panel-btn" style="grid-row: 1; grid-column: 2;" onclick="savePoints(this, 2,0,0)">+2</button>
+        <button class="panel-btn" style="grid-row: 1; grid-column: 3;" onclick="savePoints(this, -1,0,0)">-1</button>
+        <button class="panel-btn" style="grid-row: 1; grid-column: 4;" onclick="savePoints(this, -2,0,0)">-2</button>
 
-        <button class="panel-btn" style="grid-row: 2; grid-column: 1;" onclick="savePoints(3,0,0)">+3</button>
-        <button class="panel-btn" style="grid-row: 2; grid-column: 2;" onclick="savePoints(4,0,0)">+4</button>
-        <button class="panel-btn" style="grid-row: 2; grid-column: 3;" onclick="savePoints(-3,0,0)">-3</button>
-        <button class="panel-btn" style="grid-row: 2; grid-column: 4;" onclick="savePoints(-4,0,0)">-4</button>
+        <button class="panel-btn" style="grid-row: 2; grid-column: 1;" onclick="savePoints(this, 3,0,0)">+3</button>
+        <button class="panel-btn" style="grid-row: 2; grid-column: 2;" onclick="savePoints(this, 4,0,0)">+4</button>
+        <button class="panel-btn" style="grid-row: 2; grid-column: 3;" onclick="savePoints(this, -3,0,0)">-3</button>
+        <button class="panel-btn" style="grid-row: 2; grid-column: 4;" onclick="savePoints(this, -4,0,0)">-4</button>
 
-        <button class="panel-btn" style="grid-row: 3; grid-column: 1;" onclick="savePoints(0,1,0)">+A</button>
-        <button class="panel-btn" style="grid-row: 3; grid-column: 2;" onclick="savePoints(0,0,1)">+P</button>
-        <button class="panel-btn" style="grid-row: 3; grid-column: 3;" onclick="savePoints(0,-1,0)">-A</button>
-        <button class="panel-btn" style="grid-row: 3; grid-column: 4;" onclick="savePoints(0,0,-1)">-P</button>
+        <button class="panel-btn" style="grid-row: 3; grid-column: 1;" onclick="savePoints(this, 0,1,0)">+A</button>
+        <button class="panel-btn" style="grid-row: 3; grid-column: 2;" onclick="savePoints(this, 0,0,1)">+P</button>
+        <button class="panel-btn" style="grid-row: 3; grid-column: 3;" onclick="savePoints(this, 0,-1,0)">-A</button>
+        <button class="panel-btn" style="grid-row: 3; grid-column: 4;" onclick="savePoints(this, 0,0,-1)">-P</button>
 
-        <button class="panel-btn" style="grid-row: 4; grid-column: 1;" onclick="savePoints()"></button>
-        <button class="panel-btn" style="grid-row: 4; grid-column: 2;" onclick="savePoints()"></button>
-        <button class="panel-btn" style="grid-row: 4; grid-column: 3;" onclick="savePoints()">C</button>
-        <button class="panel-btn" style="grid-row: 4; grid-column: 4;" onclick="savePoints()">...</button>
+        <button class="panel-btn" style="grid-row: 4; grid-column: 1;"></button>
+        <button class="panel-btn" style="grid-row: 4; grid-column: 2;"></button>
+        <button class="panel-btn" style="grid-row: 4; grid-column: 3;">C</button>
+        <button class="panel-btn" style="grid-row: 4; grid-column: 4;">...</button>
     </div>
 
 
@@ -181,12 +181,16 @@
                 (seconds < 10 ? '0' : '') + seconds;
         }
 
-        function savePoints(score, adv, pen){
+        function savePoints(button, score, adv, pen){
+            document.querySelectorAll('.panel-btn').forEach(b => {
+                b.style.backgroundColor = '';
+            });
+
+            button.style
             loadScore = score;
             loadAdv = adv;
             loadPen = pen;
-
-            console.log('save points')
+            button.style.backgroundColor = 'yellow';
         }
 
         function setPoints(player){
@@ -195,6 +199,10 @@
                 adv1 += loadAdv;
                 pen1 += loadPen;
 
+                if(score1 < 0) score1 = 0;
+                if(adv1 < 0) adv1 = 0;
+                if(pen1 < 0) pen1 = 0;
+
                 document.getElementById('score1').textContent = score1;
                 document.getElementById('adv1').textContent = adv1;
                 document.getElementById('pen1').textContent = pen1;
@@ -202,6 +210,10 @@
                 score2 += loadScore;
                 adv2 += loadAdv;
                 pen2 += loadPen;
+
+                if(score2 < 0) score2 = 0;
+                if(adv2 < 0) adv2 = 0;
+                if(pen2 < 0) pen2 = 0;
 
                 document.getElementById('score2').textContent = score2;
                 document.getElementById('adv2').textContent = adv2;
