@@ -8,3 +8,5 @@ There are a few but this one is aimed to be as light weight and mobile friendly 
 - [BJJ-Scoreboard](https://github.com/grunch/BJJ-Scoreboard) - using web sockets
 - [BJJ-Combate](http://theorigin.net/combate/keepscore/) - using jquery http
 - [jiu-jitsu-scoreboard](https://apps.apple.com/us/app/jiu-jitsu-scoreboard/id1617421752) - App Store, Ipad
+
+![bjj score demo](doc\bjj-scorelite-demo.gif)
