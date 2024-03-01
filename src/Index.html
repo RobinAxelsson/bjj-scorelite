@@ -96,47 +96,59 @@
             <button class="time-btn" onclick="resetTimer()">Reset</button>
         </div>
         <div class="score-digits" style="grid-row: 2; grid-column: 1;">
-            <div class="digit" id="player1_score">0</div>
-            <div class="digit" style="color: green" id="player1_advantage">0</div>
-            <div class="digit" style="color: red" id="player1_penelty">0</div>
+            <div class="digit" id="score1">0</div>
+            <div class="digit" id="adv1" style="color: green" id="player1_advantage">0</div>
+            <div class="digit" id="pen1" style="color: red" id="player1_penelty">0</div>
         </div>
 
         <div class="score-digits" style="grid-row: 3; grid-column: 1;">
-            <div class="digit" id="player2_score">0</div>
-            <div class="digit" style="color: green" id="player2_advantage">0</div>
-            <div class="digit" style="color: red" id="player1_penelty">0</div>
+            <div class="digit" id="score2">0</div>
+            <div class="digit" id="adv2" style="color: green" id="player2_advantage">0</div>
+            <div class="digit" id="pen2" style="color: red" id="player1_penelty">0</div>
         </div>
 
-        <button class="player-btn" id="player-1" style="grid-row: 2; grid-column:2;">Jasmine Valfridsson</button>
-        <button class="player-btn" id="player-2" style="grid-row: 3; grid-column:2;">Shan Salih Axelsson</b>
+        <button class="player-btn" id="player-1" style="grid-row: 2; grid-column:2;" onclick="setPoints(1)">Jasmine Valfridsson</button>
+        <button class="player-btn" id="player-2" style="grid-row: 3; grid-column:2;" onclick="setPoints(2)">Shan Salih Axelsson</b>
     </div>
     <div class="button-panel">
-        <button class="panel-btn" style="grid-row: 1; grid-column: 1;" onclick="startTimer()">+1</button>
-        <button class="panel-btn" style="grid-row: 1; grid-column: 2;" onclick="startTimer()">+2</button>
-        <button class="panel-btn" style="grid-row: 1; grid-column: 3;" onclick="stopTimer()">-1</button>
-        <button class="panel-btn" style="grid-row: 1; grid-column: 4;" onclick="resetTimer()">-2</button>
+        <button class="panel-btn" style="grid-row: 1; grid-column: 1;" onclick="savePoints(1,0,0)">+1</button>
+        <button class="panel-btn" style="grid-row: 1; grid-column: 2;" onclick="savePoints(2,0,0)">+2</button>
+        <button class="panel-btn" style="grid-row: 1; grid-column: 3;" onclick="savePoints(-1,0,0)">-1</button>
+        <button class="panel-btn" style="grid-row: 1; grid-column: 4;" onclick="savePoints(-2,0,0)">-2</button>
 
-        <button class="panel-btn" style="grid-row: 2; grid-column: 1;" onclick="startTimer()">+3</button>
-        <button class="panel-btn" style="grid-row: 2; grid-column: 2;" onclick="startTimer()">+4</button>
-        <button class="panel-btn" style="grid-row: 2; grid-column: 3;" onclick="stopTimer()">-3</button>
-        <button class="panel-btn" style="grid-row: 2; grid-column: 4;" onclick="resetTimer()">-4</button>
- 
-        <button class="panel-btn" style="grid-row: 3; grid-column: 1;" onclick="startTimer()">+A</button>
-        <button class="panel-btn" style="grid-row: 3; grid-column: 2;" onclick="startTimer()">+P</button>
-        <button class="panel-btn" style="grid-row: 3; grid-column: 3;" onclick="stopTimer()">-A</button>
-        <button class="panel-btn" style="grid-row: 3; grid-column: 4;" onclick="resetTimer()">-P</button>
+        <button class="panel-btn" style="grid-row: 2; grid-column: 1;" onclick="savePoints(3,0,0)">+3</button>
+        <button class="panel-btn" style="grid-row: 2; grid-column: 2;" onclick="savePoints(4,0,0)">+4</button>
+        <button class="panel-btn" style="grid-row: 2; grid-column: 3;" onclick="savePoints(-3,0,0)">-3</button>
+        <button class="panel-btn" style="grid-row: 2; grid-column: 4;" onclick="savePoints(-4,0,0)">-4</button>
 
-        <button class="panel-btn" style="grid-row: 4; grid-column: 1;" onclick="startTimer()"></button>
-        <button class="panel-btn" style="grid-row: 4; grid-column: 2;" onclick="startTimer()"></button>
-        <button class="panel-btn" style="grid-row: 4; grid-column: 3;" onclick="stopTimer()">C</button>
-        <button class="panel-btn" style="grid-row: 4; grid-column: 4;" onclick="resetTimer()">...</button>
+        <button class="panel-btn" style="grid-row: 3; grid-column: 1;" onclick="savePoints(0,1,0)">+A</button>
+        <button class="panel-btn" style="grid-row: 3; grid-column: 2;" onclick="savePoints(0,0,1)">+P</button>
+        <button class="panel-btn" style="grid-row: 3; grid-column: 3;" onclick="savePoints(0,-1,0)">-A</button>
+        <button class="panel-btn" style="grid-row: 3; grid-column: 4;" onclick="savePoints(0,0,-1)">-P</button>
+
+        <button class="panel-btn" style="grid-row: 4; grid-column: 1;" onclick="savePoints()"></button>
+        <button class="panel-btn" style="grid-row: 4; grid-column: 2;" onclick="savePoints()"></button>
+        <button class="panel-btn" style="grid-row: 4; grid-column: 3;" onclick="savePoints()">C</button>
+        <button class="panel-btn" style="grid-row: 4; grid-column: 4;" onclick="savePoints()">...</button>
     </div>
 
 
     <script>
-        let timer = 300;
+        let startTime = 300;
+        let timer = startTime;
+
         let score1 = 0;
+        let adv1 = 0;
+        let pen1 = 0;
+
         let score2 = 0;
+        let adv2 = 0;
+        let pen2 = 0;
+
+        let loadScore = 0;
+        let loadAdv = 0;
+        let loadPen = 0;
+
         let intervalId = null;
 
         function startTimer() {
@@ -157,7 +169,7 @@
 
         function resetTimer() {
             stopTimer();
-            timer = 300;
+            timer = startTime;
             updateDisplay();
         }
 
@@ -169,13 +181,31 @@
                 (seconds < 10 ? '0' : '') + seconds;
         }
 
-        function changeScore(player, delta) {
+        function savePoints(score, adv, pen){
+            loadScore = score;
+            loadAdv = adv;
+            loadPen = pen;
+
+            console.log('save points')
+        }
+
+        function setPoints(player){
             if (player === 1) {
-                score1 += delta;
+                score1 += loadScore;
+                adv1 += loadAdv;
+                pen1 += loadPen;
+
                 document.getElementById('score1').textContent = score1;
+                document.getElementById('adv1').textContent = adv1;
+                document.getElementById('pen1').textContent = pen1;
             } else if (player === 2) {
-                score2 += delta;
+                score2 += loadScore;
+                adv2 += loadAdv;
+                pen2 += loadPen;
+
                 document.getElementById('score2').textContent = score2;
+                document.getElementById('adv2').textContent = adv2;
+                document.getElementById('pen2').textContent = pen2;
             }
         }
     </script>
