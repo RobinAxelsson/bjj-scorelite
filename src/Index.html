@@ -149,7 +149,7 @@
         <button class="panel-btn" style="grid-row: 4; grid-column: 1;" onclick="switchLastScore()">⇔</button>
         <button class="panel-btn" style="grid-row: 4; grid-column: 2;"
             onclick="savePoints(this, 0,0,0, true)">Sub</button>
-        <button class="panel-btn" style="grid-row: 4; grid-column: 3;" onclick="copyMatchScore()">Cp</button>
+        <button class="panel-btn" style="grid-row: 4; grid-column: 3;" onclick="copyMatchScore()">Cpy</button>
         <button class="panel-btn" style="grid-row: 4; grid-column: 4;" onclick="menu()">...</button>
     </div>
 
@@ -245,6 +245,8 @@
             loadPen = pen;
             if (sub === true)
                 loadSub = true;
+            else
+                loadSub = false;
 
             if (button != null)
                 button.style.backgroundColor = 'yellow';
@@ -265,9 +267,12 @@
             document.getElementById('score1').textContent = score1;
             document.getElementById('adv1').textContent = adv1;
             document.getElementById('pen1').textContent = pen1;
+            document.getElementById('fighter1').innerText = document.getElementById('fighter1').innerText.replace(/☠+/g, '');
+
             document.getElementById('score2').textContent = score2;
             document.getElementById('adv2').textContent = adv2;
             document.getElementById('pen2').textContent = pen2;
+            document.getElementById('fighter2').innerText = document.getElementById('fighter2').innerText.replace(/☠+/g, '');
         }
 
         function refreshScores() {
@@ -277,12 +282,25 @@
             if (score2 < 0) score2 = 0;
             if (adv2 < 0) adv2 = 0;
             if (pen2 < 0) pen2 = 0;
+
             document.getElementById('score1').textContent = score1;
             document.getElementById('adv1').textContent = adv1;
             document.getElementById('pen1').textContent = pen1;
             document.getElementById('score2').textContent = score2;
             document.getElementById('adv2').textContent = adv2;
             document.getElementById('pen2').textContent = pen2;
+
+            if (sub1 === true && document.getElementById('fighter2').innerText.slice(-1) !== '☠')
+                document.getElementById('fighter2').innerText =  document.getElementById('fighter2').innerText + '☠';
+
+            if(sub1 === true)
+                document.getElementById('fighter1').innerText = document.getElementById('fighter1').innerText.replace(/☠+/g, '');
+
+            if (sub2 === true && document.getElementById('fighter1').innerText.slice(-1) !== '☠')
+                document.getElementById('fighter1').innerText = document.getElementById('fighter1').innerText + '☠';
+
+            if(sub2 === true)
+                document.getElementById('fighter2').innerText = document.getElementById('fighter2').innerText.replace(/☠+/g, '');
         }
 
         function setPoints(fighter) {
@@ -318,28 +336,34 @@
                 score1 -= score;
                 adv1 -= adv;
                 pen1 -= pen;
-                sub1 = false;
-
+                
                 score2 += score;
                 adv2 += adv;
                 pen2 += pen;
-                sub2 = sub;
+
+                if(sub === true){
+                    sub1 = false;
+                    sub2 = true;
+                }
             }
             if (fighter === 2) {
-                score1 += score;
-                adv1 += adv;
-                pen1 += pen;
-                sub1 += sub;
-
                 score2 -= score;
                 adv2 -= adv;
                 pen2 -= pen;
-                sub2 = false;
+
+                score1 += score;
+                adv1 += adv;
+                pen1 += pen;
+
+                if(sub === true){
+                    sub2 = false;
+                    sub1 = true;
+                }
             }
 
-            if (fighter === 1) 
+            if (fighter === 1)
                 fighter = 2;
-            else 
+            else
                 fighter = 1;
 
             refreshScores();
