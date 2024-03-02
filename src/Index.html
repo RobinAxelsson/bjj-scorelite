@@ -88,24 +88,48 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
+            width: 100vw;
             height: 100%;
+            overflow: hidden;
             background-color: rgba(0, 0, 0, 0.5);
             display: none;
             justify-content: center;
             align-items: center;
+            font-size: 8vw;
         }
 
         #editNames {
+            width: 100%;
+            overflow: hidden;
+            display: grid;
+            grid-template-rows: repeat(3, auto);
+            align-items: center;
             background: white;
-            padding: 20px;
             border-radius: 5px;
+        }
+
+        .set-timer-menu {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+
+        .set-timer-menu > * {
+            margin-inline: 5px;
+        }
+
+        .set-timer-buttons {
+            display: flex;
+            align-content: space-evenly;
+        }
+        .set-timer-buttons > * {
+            width: 20vw;
         }
     </style>
 </head>
 
 <body>
-
     <div class="top-board">
         <div class="digit" id="timer_digits" style="grid-row: 1; grid-column: 1;">05:00</div>
         <div class="time-buttons" style="grid-row: 1; grid-column: 2;">
@@ -147,24 +171,33 @@
         <button class="panel-btn" style="grid-row: 3; grid-column: 4;" onclick="savePoints(this, 0,0,-1)">-P</button>
 
         <button class="panel-btn" style="grid-row: 4; grid-column: 1;" onclick="switchLastScore()">⇔</button>
-        <button class="panel-btn" style="grid-row: 4; grid-column: 2;"
-            onclick="savePoints(this, 0,0,0, true)">Sub</button>
+        <button class="panel-btn" style="grid-row: 4; grid-column: 2;" onclick="savePoints(this, 0,0,0, true)">Sub</button>
         <button class="panel-btn" style="grid-row: 4; grid-column: 3;" onclick="copyMatchScore()">Cpy</button>
         <button class="panel-btn" style="grid-row: 4; grid-column: 4;" onclick="menu()">...</button>
     </div>
 
     <div id="menuOverlay">
         <div id="editNames">
+            <div class="set-timer-menu">
+                <div id="timer-minutes">5</div>
+                <div class="set-timer-buttons">
+                    <button onclick="changeTimerMinutes(-1)">-</button>
+                    <button onclick="changeTimerMinutes(1)">+</button>
+                </div>
+            </div>
             <input type="text" id="name1" placeholder="Fighter 1">
             <input type="text" id="name2" placeholder="Fighter 2">
-            <button id="submitName" onclick="submitMenu()">Submit</button>
-            <button id="closeModal" onclick="closeMenu()">Close</button>
+            <div>
+                <button id="submitName" onclick="submitMenu()">Submit</button>
+                <button id="closeModal" onclick="closeMenu()">Close</button>
+            </div>
         </div>
     </div>
 
     <script>
         let startTime = 300;
         let timer = startTime;
+        let tempTime = startTime;
 
         let score1 = 0;
         let adv1 = 0;
@@ -382,15 +415,25 @@
 
         function menu() {
             document.getElementById('menuOverlay').style.display = 'flex';
+            document.getElementById('timer-minutes').innerText = startTime / 60;
+        }
+
+        function changeTimerMinutes(delta){
+            tempTime += delta * 60;
+            document.getElementById('timer-minutes').innerText = tempTime / 60;
         }
 
         function submitMenu() {
             document.getElementById('fighter1').innerText = document.getElementById('name1').value;
             document.getElementById('fighter2').innerText = document.getElementById('name2').value;
             document.getElementById('menuOverlay').style.display = 'none';
+            document.getElementById('menuOverlay').style.display = 'none';
+            startTime = tempTime;
+            resetTimer();
         }
 
         function closeMenu() {
+            tempTime = startTime;
             document.getElementById('menuOverlay').style.display = 'none';
         }
     </script>
