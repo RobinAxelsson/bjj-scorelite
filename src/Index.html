@@ -416,6 +416,8 @@
         function menu() {
             document.getElementById('menuOverlay').style.display = 'flex';
             document.getElementById('timer-minutes').innerText = startTime / 60;
+            document.getElementById('name1').value = document.getElementById('fighter1').innerText;
+            document.getElementById('name2').value = document.getElementById('fighter2').innerText;
         }
 
         function changeTimerMinutes(delta){
