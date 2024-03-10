@@ -237,8 +237,8 @@
         function startTimer() {
             if (intervalId === null) {
                 intervalId = setInterval(function () {
-                    if(timer <== 0) return;
-                    timer--;
+                    if(timer > 0)
+                        timer--;
                     updateDisplay();
                 }, 1000);
             }
