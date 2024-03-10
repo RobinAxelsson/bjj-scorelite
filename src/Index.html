@@ -409,7 +409,7 @@
             let fighter2 = document.getElementById('fighter2').innerText;
             let wonBySub = `Won by Submission ${document.getElementById('timer_digits').textContent}`;
 
-            let matchSummary = `${fighter1} ${score1} A${adv1} P${pen1} ${sub1 ? wonBySub : ''}\n${fighter2} ${score2} A${adv2} P${pen2} ${sub2 ? wonBySub : ''}`;
+            let matchSummary = `${fighter1} ${score1} A${adv1} P${pen1} ${sub1 ? wonBySub : ''}\n${fighter2} S${score2} A${adv2} P${pen2} ${sub2 ? wonBySub : ''}`;
 
             navigator.clipboard.writeText(matchSummary);
         }
